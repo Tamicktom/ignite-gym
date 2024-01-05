@@ -46,6 +46,7 @@ export function Signin() {
 
         <Box pt={6} w="full">
           <Button label="Acessar" />
+          <Button label="Criar conta" variant="outline" />
         </Box>
       </Center>
     </VStack>
