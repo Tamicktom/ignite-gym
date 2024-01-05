@@ -1,6 +1,10 @@
 //* Libraries imports
 import { VStack, Image, Text, Center, Heading } from "native-base";
 
+//* Components imports
+import { Input } from "@components/Input";
+
+//* Local imports
 import LogoSvg from "@assets/logo.svg"
 import BackgroundImg from "@assets/background.png";
 
@@ -26,6 +30,8 @@ export function Signin() {
         <Heading color="gray.100" fontSize="xl" pb={6} fontFamily="heading">
           Acesse sua conta
         </Heading>
+        <Input placeholder="E-mail" />
+        <Input placeholder="Senha" />
       </Center>
     </VStack>
   );
