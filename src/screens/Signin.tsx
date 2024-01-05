@@ -1,8 +1,9 @@
 //* Libraries imports
-import { VStack, Image, Text, Center, Heading } from "native-base";
+import { VStack, Image, Text, Center, Heading, Box } from "native-base";
 
 //* Components imports
 import { Input } from "@components/Input";
+import { Button } from "@components/Button";
 
 //* Local imports
 import LogoSvg from "@assets/logo.svg"
@@ -42,6 +43,10 @@ export function Signin() {
           autoCapitalize="none"
           autoCorrect={false}
         />
+
+        <Box pt={6} w="full">
+          <Button label="Acessar" />
+        </Box>
       </Center>
     </VStack>
   );
