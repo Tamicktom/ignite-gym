@@ -3,9 +3,10 @@ import { Button as NbButton, Text, IButtonProps } from "native-base";
 
 interface Props extends IButtonProps {
   label: string;
+  variant?: "outline" | "solid";
 }
 
-export function Button({ label, variant, ...rest }: Props) {
+export function Button({ label, variant = "solid", ...rest }: Props) {
   return (
     <NbButton
       h={14}
