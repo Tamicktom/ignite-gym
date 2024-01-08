@@ -1,5 +1,5 @@
 //* Libraries imports
-import { Box } from "native-base";
+import { Box, useTheme } from "native-base";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 //* Routes imports
@@ -7,8 +7,13 @@ import { AuthRoutes } from "./auth.routes";
 
 export function Routes() {
 
+  const nativeBaseTheme = useTheme();
+
   const theme = { ...DefaultTheme };
-  theme.colors.background = "transparent";
+  theme.colors = {
+    ...DefaultTheme.colors,
+    background: nativeBaseTheme.colors.gray[700],
+  }
 
   return (
     <Box flex={1} bg="gray.700">
