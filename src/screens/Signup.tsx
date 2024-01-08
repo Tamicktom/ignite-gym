@@ -17,7 +17,7 @@ export function Signup() {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <VStack flex={1} background="gray.700" px={10} pb={16}>
+      <VStack flex={1} px={10} pb={16}>
         <Image
           source={BackgroundImg}
           alt="Pessoas treinando"
