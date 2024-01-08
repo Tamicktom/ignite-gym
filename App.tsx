@@ -6,8 +6,7 @@ import { NativeBaseProvider, Center } from 'native-base';
 
 //* Components imports
 import Loading from "@components/Loading";
-import { Signin } from '@screens/Signin';
-import { Signup } from '@screens/Signup';
+import { Routes } from '@routes/index';
 
 //* Styles imports
 import { THEME } from "./src/theme";
@@ -24,7 +23,7 @@ export default function App() {
       <StatusBar style="dark" translucent backgroundColor='transparent' />
       {
         fontsLoaded
-          ? <Signup />
+          ? <Routes />
           : <Loading />
       }
     </NativeBaseProvider>
