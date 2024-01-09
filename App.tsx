@@ -1,8 +1,7 @@
 //* Libraries imports
 import { StatusBar } from 'expo-status-bar';
-import { Text } from 'react-native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
-import { NativeBaseProvider, Center } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 
 //* Components imports
 import Loading from "@components/Loading";
