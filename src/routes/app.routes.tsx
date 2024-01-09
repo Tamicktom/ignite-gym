@@ -1,5 +1,5 @@
 //* Libraris imports
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator, type BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 //* Screens imports
 import { Home } from "@screens/Home";
@@ -13,6 +13,8 @@ type AppRoutesProps = {
   exercise: undefined;
   profile: undefined;
 }
+
+export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutesProps>;
 
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutesProps>();
 
