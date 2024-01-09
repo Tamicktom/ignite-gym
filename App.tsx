@@ -10,6 +10,10 @@ import { Routes } from '@routes/index';
 //* Styles imports
 import { THEME } from "./src/theme";
 
+/**
+ * This is the main component of the application, the first component that is rendered.
+ */
+
 export default function App() {
 
   let [fontsLoaded] = useFonts({
