@@ -5,6 +5,7 @@ import { VStack, Text, HStack, FlatList, Heading } from 'native-base';
 //* Components imports
 import { HomeHeader } from '../components/HomeHeader';
 import { Group } from '../components/Group';
+import { ExerciseCard } from '@components/ExerciseCard';
 
 //* Utils imports
 import { idGenerator } from '@utils/idGenerator';
@@ -72,7 +73,9 @@ export function Home() {
             4
           </Text>
         </HStack>
+        <ExerciseCard />
       </VStack>
+
     </VStack>
   );
 }
