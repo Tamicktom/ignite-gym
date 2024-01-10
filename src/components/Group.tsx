@@ -17,6 +17,12 @@ export function Group({ name, ...rest }: Props) {
       justifyContent="center"
       alignItems="center"
       overflow="hidden"
+      borderColor="transparent"
+      borderWidth={1}
+      _pressed={{
+        borderColor: "green.500",
+        borderWidth: 1
+      }}
       {...rest}
     >
       <Text color="gray.200" textTransform="uppercase" fontSize="xs" fontWeight="bold">
