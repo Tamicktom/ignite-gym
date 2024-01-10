@@ -2,18 +2,30 @@ export function idGenerator(): `${string}-${string}-${string}-${string}-${string
   const dictionary =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const length = 32;
-  let id = "";
-  for (let i = 0; i < length; i++) {
-    id += dictionary.charAt(Math.floor(Math.random() * dictionary.length));
-  }
-  //shufle again
-  let array = id.split("");
-  array.sort(() => Math.random() - 0.5);
-  id = array.join("");
+  //create a seed using the current time
+  const seed = Date.now();
 
-  //break in groups of 8, like a UUID example: 12345678-1234-1234-1234-123456789012
-  return id.replace(
-    /(.{8})(.{4})(.{4})(.{4})(.{12})/,
-    "$1-$2-$3-$4-$5"
-  ) as `${string}-${string}-${string}-${string}-${string}`;
+  let randomString = "";
+  for (let i = 0; i < length; i++) {
+    const randomChar = Math.floor(Math.random() * dictionary.length);
+    randomString += dictionary.charAt(randomChar);
+  }
+
+  //shuffle all the characters in the string using the seed
+  let shuffledString = "";
+  let currentIndex = randomString.length;
+  while (currentIndex !== 0) {
+    const randomIndex = Math.floor(seed % currentIndex);
+    shuffledString += randomString.charAt(randomIndex);
+    randomString = randomString.substring(0, randomIndex);
+    currentIndex--;
+  }
+
+  return `${shuffledString.substring(0, 8)}-${shuffledString.substring(
+    8,
+    12
+  )}-${shuffledString.substring(12, 16)}-${shuffledString.substring(
+    16,
+    20
+  )}-${shuffledString.substring(20, 32)}`;
 }
