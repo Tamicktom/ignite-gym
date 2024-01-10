@@ -1,6 +1,6 @@
 //* Libraries imports
 import { useState } from 'react';
-import { VStack, Text, HStack, FlatList } from 'native-base';
+import { VStack, Text, HStack, FlatList, Heading } from 'native-base';
 
 //* Components imports
 import { HomeHeader } from '../components/HomeHeader';
@@ -58,10 +58,21 @@ export function Home() {
             justifyContent: 'center',
             alignItems: 'center',
             paddingX: "8",
-            paddingY: "4",
+            paddingY: "8",
           }}
         />
       </HStack>
+
+      <VStack flex={1} px="8">
+        <HStack justifyContent="space-between" alignItems="center" pb={5}>
+          <Heading color="gray.200" fontSize="md">
+            Exercícios
+          </Heading>
+          <Text color="gray.200" fontSize="sm">
+            4
+          </Text>
+        </HStack>
+      </VStack>
     </VStack>
   );
 }
