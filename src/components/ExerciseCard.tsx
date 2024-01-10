@@ -3,8 +3,7 @@ import { TouchableOpacity, type TouchableOpacityProps } from "react-native";
 import { HStack, Heading, Image, Text, VStack, Icon } from "native-base";
 import { Entypo } from '@expo/vector-icons'
 
-interface Props extends TouchableOpacityProps { }
-
+interface Props extends TouchableOpacityProps {}
 
 export function ExerciseCard({ ...rest }: Props) {
   return (

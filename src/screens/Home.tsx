@@ -37,6 +37,7 @@ const initGroups: Group[] = [
 
 export function Home() {
   const [groups, setGroups] = useState<Group[]>(initGroups);
+  const [exercises, setExercises] = useState<Group[]>(initGroups);
   const [groupSelected, setGroupSelected] = useState<string>(initGroups[0].id);
 
   return (
@@ -70,10 +71,24 @@ export function Home() {
             Exercícios
           </Heading>
           <Text color="gray.200" fontSize="sm">
-            4
+            {exercises.length}
           </Text>
         </HStack>
-        <ExerciseCard />
+
+        <FlatList
+          data={exercises}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <ExerciseCard />
+          )}
+          showsVerticalScrollIndicator={false}
+          _contentContainerStyle={{
+            paddingBottom: "8",
+          }}
+          ListEmptyComponent={<Text color="gray.200">Nenhum exercício cadastrado</Text>}
+          ItemSeparatorComponent={() => <VStack h="3" />}
+        />
+
       </VStack>
 
     </VStack>
