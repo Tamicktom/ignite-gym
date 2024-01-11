@@ -1,5 +1,6 @@
 //* Libraries imports
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { VStack, Text, HStack, FlatList, Heading } from 'native-base';
 
 //* Components imports
@@ -9,6 +10,7 @@ import { ExerciseCard } from '@components/ExerciseCard';
 
 //* Utils imports
 import { idGenerator } from '@utils/idGenerator';
+import type { AppNavigatorRoutesProps } from '@routes/app.routes';
 
 type Group = {
   id: string;
@@ -39,6 +41,12 @@ export function Home() {
   const [groups, setGroups] = useState<Group[]>(initGroups);
   const [exercises, setExercises] = useState<Group[]>(initGroups);
   const [groupSelected, setGroupSelected] = useState<string>(initGroups[0].id);
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  function HandleOpenExerciseDetails(id: string) {
+    navigation.navigate("exercise");
+  }
 
   return (
     <VStack flex={1}>
@@ -79,7 +87,9 @@ export function Home() {
           data={exercises}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <ExerciseCard />
+            <ExerciseCard
+              onPress={() => HandleOpenExerciseDetails(item.id)}
+            />
           )}
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{
