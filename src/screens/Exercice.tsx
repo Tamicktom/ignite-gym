@@ -1,8 +1,11 @@
 //* Libraries imports
 import { TouchableOpacity } from 'react-native';
-import { Center, Text, VStack, Icon, HStack, Heading, Image } from 'native-base';
+import { Center, Text, VStack, Icon, HStack, Heading, Image, Box } from 'native-base';
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+
+//* Components imports
+import { Button } from '@components/Button';
 
 //* Utils imports
 import type { AppNavigatorRoutesProps } from "@routes/app.routes";
@@ -54,6 +57,27 @@ export function Exercice() {
           mb={4}
           rounded="lg"
         />
+
+        <Box bg="gray.600" rounded="md" pb={4} px={4}>
+          <HStack justifyContent="space-around" alignItems="center" pb={6} pt={5}>
+            <HStack>
+              <SeriesSvg />
+              <Text color="gray.200" pl={2}>
+                3 séries
+              </Text>
+            </HStack>
+            <HStack>
+              <RepetitionsSvg />
+              <Text color="gray.200" pl={2}>
+                10 repetições
+              </Text>
+            </HStack>
+          </HStack>
+
+          <Button
+            label="Marcar como realizado"
+          />
+        </Box>
       </VStack>
     </VStack>
   );
