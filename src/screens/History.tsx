@@ -29,12 +29,23 @@ export function History() {
             {section.title}
           </Heading>
         )}
+        ListEmptyComponent={() => (
+          <Heading color="gray.100" fontSize="md" pt={10} pb={3} textAlign="center">
+            Nenhum exercicio realizado ainda
+          </Heading>
+        )}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 16
-        }}
+        contentContainerStyle={
+          exercises.length === 0 ? {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          } : {
+            paddingHorizontal: 16,
+            paddingBottom: 100,
+          }
+        }
         ItemSeparatorComponent={() => <VStack h="3" />}
-        paddingBottom={100}
       />
     </VStack>
   );
