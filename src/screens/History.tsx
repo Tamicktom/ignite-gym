@@ -8,7 +8,7 @@ import { HistoryCard } from '@components/HistoryCard';
 
 export function History() {
   const [exercises, setExercises] = useState([
-    { title: 'Costas', data: ['Puxada frontal', 'Remada baixa'] },
+    { title: '26:08:22', data: ['Puxada frontal', 'Remada baixa'] },
     { title: 'Peito', data: ['Supino reto', 'Supino inclinado'] },
     { title: 'Ombros', data: ['Desenvolvimento', 'Elevação lateral'] },
     { title: 'Bíceps', data: ['Rosca direta', 'Rosca alternada'] },
