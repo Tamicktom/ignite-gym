@@ -1,6 +1,7 @@
 //* Libraries imports
 import { useState } from 'react';
-import { Center, VStack, ScrollView, Skeleton } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import { Center, VStack, ScrollView, Skeleton, Text } from 'native-base';
 
 //* Components imports
 import { ScreenHeader } from '@components/ScreenHeader';
@@ -30,6 +31,12 @@ export function Profile() {
                 source={{ uri: "https://github.com/tamicktom.png" }}
               />
           }
+
+          <TouchableOpacity>
+            <Text color="green.500" fontWeight="bold" fontSize="md" pt={2} pb={8}>
+              Alterar foto
+            </Text>
+          </TouchableOpacity>
         </Center>
       </ScrollView>
     </VStack>
