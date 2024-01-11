@@ -1,6 +1,6 @@
 //* Libraries imports
 import { TouchableOpacity } from 'react-native';
-import { Center, Text, VStack, Icon, HStack, Heading } from 'native-base';
+import { Center, Text, VStack, Icon, HStack, Heading, Image } from 'native-base';
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import type { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 import BodySvg from "@assets/body.svg";
+import SeriesSvg from "@assets/series.svg";
+import RepetitionsSvg from "@assets/repetitions.svg";
 
 export function Exercice() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
@@ -40,6 +42,18 @@ export function Exercice() {
             </Text>
           </HStack>
         </HStack>
+      </VStack>
+
+      <VStack p={8}>
+        <Image
+          w="full"
+          h={80}
+          source={{ uri: "https://i.pinimg.com/736x/4e/5d/db/4e5ddbf49c3c268601a71afcd6cdaf40.jpg" }}
+          alt="Exercício"
+          resizeMode='cover'
+          mb={4}
+          rounded="lg"
+        />
       </VStack>
     </VStack>
   );
