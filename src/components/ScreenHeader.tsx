@@ -1,9 +1,16 @@
 //* Libraries imports
-import { Center } from "native-base";
+import { Center, Heading } from "native-base";
 
-export function ScreenHeader() {
+type Props = {
+  title?: string;
+}
+
+export function ScreenHeader(props: Props) {
   return (
-    <Center flex={1}>
+    <Center bg="gray.600" pb={6} pt={16}>
+      <Heading color="gray.100" fontSize="xl">
+        {props.title}
+      </Heading>
     </Center>
   )
 }
