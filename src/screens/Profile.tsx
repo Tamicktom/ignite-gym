@@ -25,14 +25,8 @@ export function Profile() {
         quality: 0.9,
         aspect: [1, 1],
       });
-      if (response.canceled) {
-        return;
-      }
-      const { assets } = response;
-      if (assets.length) {
-        const { uri } = assets[0];
-        setPhoto(uri);
-      }
+      if (response.canceled) return;
+      if (response.assets.length) setPhoto(response.assets[0].uri);
     } catch (error) {
       console.log(error);
     } finally {
