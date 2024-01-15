@@ -17,27 +17,28 @@ export function Profile() {
   const [photo, setPhoto] = useState<string>("https://github.com/tamicktom.png");
 
   async function handleUserPhotoSelect() {
-    const response = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 0.9,
-      aspect: [1, 1],
-    });
-
-    if (response.canceled) {
-      return;
-    }
-
     setPhotoIsLoading(true);
-
-    const { assets } = response;
-
-    if (assets.length) {
-      const { uri } = assets[0];
-      setPhoto(uri);
+    try {
+      const response = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 0.9,
+        aspect: [1, 1],
+      });
+      if (response.canceled) {
+        return;
+      }
+      const { assets } = response;
+      if (assets.length) {
+        const { uri } = assets[0];
+        setPhoto(uri);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setPhotoIsLoading(false);
     }
 
-    setPhotoIsLoading(false);
   }
 
   return (
