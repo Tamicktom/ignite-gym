@@ -1,8 +1,9 @@
 //* Libraries imports
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Center, VStack, ScrollView, Skeleton, Heading } from 'native-base';
+import { Center, VStack, ScrollView, Skeleton, Heading, useToast } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 
 //* Components imports
 import { ScreenHeader } from '@components/ScreenHeader';
@@ -16,23 +17,44 @@ export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [photo, setPhoto] = useState<string>("https://github.com/tamicktom.png");
 
+  const toast = useToast();
+
   async function handleUserPhotoSelect() {
     setPhotoIsLoading(true);
     try {
-      const response = await ImagePicker.launchImageLibraryAsync({
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         quality: 0.9,
         aspect: [1, 1],
       });
-      if (response.canceled) return;
-      if (response.assets.length) setPhoto(response.assets[0].uri);
+
+      if (photoSelected.canceled) return;
+
+      if (photoSelected.assets.length && photoSelected.assets[0].uri) {
+        const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri);
+        //if image exist, and is bigger than 3mb, cancel
+        if (photoInfo.exists && ((photoInfo.size / 1024) / 1024) > 3)
+          return toast.show({
+            title: "Imagem muito grande!",
+            placement: "top",
+            bgColor: "red.500",
+          });
+
+        if (photoInfo.exists) {
+          setPhoto(photoSelected.assets[0].uri);
+          toast.show({
+            title: "Foto atualizada!",
+            placement: "top",
+            duration: 3000,
+          });
+        }
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setPhotoIsLoading(false);
     }
-
   }
 
   return (
