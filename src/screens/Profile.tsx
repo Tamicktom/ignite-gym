@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Center, VStack, ScrollView, Skeleton, Heading } from 'native-base';
+import * as ImagePicker from 'expo-image-picker';
 
 //* Components imports
 import { ScreenHeader } from '@components/ScreenHeader';
@@ -13,6 +14,31 @@ const PHOTO_SIZE = 32;
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
+  const [photo, setPhoto] = useState<string>("https://github.com/tamicktom.png");
+
+  async function handleUserPhotoSelect() {
+    const response = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 0.9,
+      aspect: [1, 1],
+    });
+
+    if (response.canceled) {
+      return;
+    }
+
+    setPhotoIsLoading(true);
+
+    const { assets } = response;
+
+    if (assets.length) {
+      const { uri } = assets[0];
+      setPhoto(uri);
+    }
+
+    setPhotoIsLoading(false);
+  }
 
   return (
     <VStack flex={1}>
@@ -28,10 +54,12 @@ export function Profile() {
                 startColor="gray.500"
                 endColor="gray.400"
               />
-              : <TouchableOpacity>
+              : <TouchableOpacity
+                onPress={handleUserPhotoSelect}
+              >
                 <UserPhoto
                   size={PHOTO_SIZE}
-                  source={{ uri: "https://github.com/tamicktom.png" }}
+                  source={{ uri: photo }}
                 />
               </TouchableOpacity>
           }
