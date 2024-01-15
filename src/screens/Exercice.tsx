@@ -61,7 +61,7 @@ export function Exercice() {
 
           <Box bg="gray.600" rounded="md" pb={4} px={4}>
             <HStack justifyContent="space-around" alignItems="center" pb={6} pt={5}>
-              <HStack>
+              <HStack> 
                 <SeriesSvg />
                 <Text color="gray.200" pl={2}>
                   3 séries
