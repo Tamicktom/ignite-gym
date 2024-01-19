@@ -1,6 +1,7 @@
 //* Libraries imports
 import { VStack, Image, Text, Center, Heading, Box, ScrollView } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from 'react-hook-form';
 
 //* Components imports
 import { Input } from "@components/Input";
@@ -14,8 +15,13 @@ import BackgroundImg from "@assets/background.png";
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
 export function Signup() {
+  const form = useForm();
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
+  function handleSignUp() {
+
+  }
 
   return (
     <ScrollView
@@ -45,27 +51,76 @@ export function Signup() {
           <Heading color="gray.100" fontSize="xl" pb={6} fontFamily="heading">
             Crie sua conta
           </Heading>
-          <Input
-            placeholder="Nome"
-            keyboardType="default"
-            autoCapitalize="none"
-            autoCorrect={false}
+
+          <Controller
+            control={form.control}
+            name="name"
+            render={(props) => (
+              <Input
+                placeholder="Nome"
+                keyboardType="default"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={props.field.onChange}
+                onBlur={props.field.onBlur}
+                value={props.field.value}
+              />
+            )}
           />
-          <Input
-            placeholder="E-mail"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
+
+          <Controller
+            control={form.control}
+            name="email"
+            render={(props) => (
+              <Input
+                placeholder="E-mail"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={props.field.onChange}
+                onBlur={props.field.onBlur}
+                value={props.field.value}
+              />
+            )}
           />
-          <Input
-            placeholder="Senha"
-            secureTextEntry
-            autoCapitalize="none"
-            autoCorrect={false}
+
+          <Controller
+            control={form.control}
+            name="password"
+            render={(props) => (
+              <Input
+                placeholder="Senha"
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={props.field.onChange}
+                onBlur={props.field.onBlur}
+                value={props.field.value}
+              />
+            )}
+          />
+
+          <Controller
+            control={form.control}
+            name="password_confirmation"
+            render={(props) => (
+              <Input
+                placeholder="Confirmação de senha"
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={props.field.onChange}
+                onBlur={props.field.onBlur}
+                value={props.field.value}
+              />
+            )}
           />
 
           <Box pt={6} w="full">
-            <Button label="Criar e acessar" />
+            <Button
+              label="Criar e acessar"
+              onPress={handleSignUp}
+            />
           </Box>
         </Center>
 
