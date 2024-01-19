@@ -81,17 +81,20 @@ export function Signup() {
                 onChangeText={props.field.onChange}
                 onBlur={props.field.onBlur}
                 value={props.field.value}
+                errorMessage={form.formState.errors.name?.message}
               />
             )}
           />
-
-          <Text color="white">{form.formState.errors.name?.message}</Text>
 
           <Controller
             control={form.control}
             name="email"
             rules={{
               required: 'Informe seu e-mail',
+              pattern: {
+                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+                message: 'E-mail inválido'
+              }
             }}
             render={(props) => (
               <Input
@@ -102,11 +105,10 @@ export function Signup() {
                 onChangeText={props.field.onChange}
                 onBlur={props.field.onBlur}
                 value={props.field.value}
+                errorMessage={form.formState.errors.email?.message}
               />
             )}
           />
-
-          <Text color="white">{form.formState.errors.email?.message}</Text>
 
           <Controller
             control={form.control}
@@ -123,11 +125,10 @@ export function Signup() {
                 onChangeText={props.field.onChange}
                 onBlur={props.field.onBlur}
                 value={props.field.value}
+                errorMessage={form.formState.errors.password?.message}
               />
             )}
           />
-
-          <Text color="white">{form.formState.errors.password?.message}</Text>
 
           <Controller
             control={form.control}
@@ -146,11 +147,10 @@ export function Signup() {
                 value={props.field.value}
                 onSubmitEditing={form.handleSubmit(handleSignUp)}
                 returnKeyType="send"
+                errorMessage={form.formState.errors.password_confirmation?.message}
               />
             )}
           />
-
-          <Text color="white">{form.formState.errors.password_confirmation?.message}</Text>
 
           <Box pt={6} w="full">
             <Button

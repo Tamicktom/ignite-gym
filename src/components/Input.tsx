@@ -1,13 +1,17 @@
 //* Libraries imports
-import { Input as NbInput, Box, type IInputProps } from "native-base";
+import { Input as NbInput, FormControl, type IInputProps } from "native-base";
 
-interface Props extends IInputProps { }
+interface Props extends IInputProps {
+  errorMessage?: string;
+}
 
-export function Input(props: Props) {
+export function Input({ errorMessage, isInvalid, ...rest }: Props) {
+  const isWrong = !!errorMessage || isInvalid;
   return (
-    <Box
+    <FormControl
       width="100%"
       pb={4}
+      isInvalid={isWrong}
     >
       <NbInput
         bg="gray.700"
@@ -23,8 +27,17 @@ export function Input(props: Props) {
           borderWidth: 1,
           borderColor: "green.500",
         }}
-        {...props}
+        isInvalid={isWrong}
+        _invalid={{
+          borderColor: "red.500",
+          borderWidth: 1,
+        }}
+        {...rest}
       />
-    </Box>
+
+      <FormControl.ErrorMessage color="red.500" fontSize="sm">
+        {errorMessage}
+      </FormControl.ErrorMessage>
+    </FormControl>
   );
 }
