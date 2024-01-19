@@ -2,6 +2,8 @@
 import { VStack, Image, Text, Center, Heading, Box, ScrollView } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 //* Components imports
 import { Input } from "@components/Input";
@@ -14,12 +16,14 @@ import BackgroundImg from "@assets/background.png";
 //* Types imports
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
-type FormDataProps = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
+const signupSchema = yup.object({
+  name: yup.string().required('Informe seu nome'),
+  email: yup.string().email('E-mail inválido').required('Informe seu e-mail'),
+  password: yup.string().required('Senha obrigatória'),
+  password_confirmation: yup.string().required('Confirmação de senha obrigatória')
+}).required();
+
+type FormDataProps = yup.InferType<typeof signupSchema>;
 
 export function Signup() {
   const form = useForm<FormDataProps>({
@@ -28,7 +32,8 @@ export function Signup() {
       email: '',
       password: '',
       password_confirmation: ''
-    }
+    },
+    resolver: yupResolver(signupSchema)
   });
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
@@ -69,9 +74,6 @@ export function Signup() {
           <Controller
             control={form.control}
             name="name"
-            rules={{
-              required: 'Informe seu nome'
-            }}
             render={(props) => (
               <Input
                 placeholder="Nome"
@@ -89,13 +91,6 @@ export function Signup() {
           <Controller
             control={form.control}
             name="email"
-            rules={{
-              required: 'Informe seu e-mail',
-              pattern: {
-                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
-                message: 'E-mail inválido'
-              }
-            }}
             render={(props) => (
               <Input
                 placeholder="E-mail"
@@ -113,9 +108,6 @@ export function Signup() {
           <Controller
             control={form.control}
             name="password"
-            rules={{
-              required: 'Senha obrigatória'
-            }}
             render={(props) => (
               <Input
                 placeholder="Senha"
@@ -133,9 +125,6 @@ export function Signup() {
           <Controller
             control={form.control}
             name="password_confirmation"
-            rules={{
-              required: 'Confirmação de senha obrigatória'
-            }}
             render={(props) => (
               <Input
                 placeholder="Confirmação de senha"
