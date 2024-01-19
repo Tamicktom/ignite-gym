@@ -141,7 +141,7 @@ export function Signup() {
             )}
           />
 
-          <Box pt={6} w="full">
+          <Box pt={8} w="full">
             <Button
               label="Criar e acessar"
               onPress={form.handleSubmit(handleSignUp)}
@@ -149,7 +149,7 @@ export function Signup() {
           </Box>
         </Center>
 
-        <Center pt={24}>
+        <Center pt={12}>
           <Button
             label="Voltar para o login"
             variant="outline"
