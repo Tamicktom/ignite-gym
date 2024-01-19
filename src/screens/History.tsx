@@ -25,12 +25,12 @@ export function History() {
         keyExtractor={(item, index) => item + index}
         renderItem={({ item }) => <HistoryCard />}
         renderSectionHeader={({ section }) => (
-          <Heading color="gray.200" fontSize="md" pt={10} pb={3}>
+          <Heading color="gray.200" fontSize="md" pt={10} pb={3} fontFamily="heading">
             {section.title}
           </Heading>
         )}
         ListEmptyComponent={() => (
-          <Heading color="gray.100" fontSize="md" pt={10} pb={3} textAlign="center">
+          <Heading color="gray.100" fontSize="md" pt={10} pb={3} textAlign="center" fontFamily="heading">
             Nenhum exercicio realizado ainda
           </Heading>
         )}
