@@ -19,8 +19,8 @@ import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 const signupSchema = yup.object({
   name: yup.string().required('Informe seu nome'),
   email: yup.string().email('E-mail inválido').required('Informe seu e-mail'),
-  password: yup.string().required('Senha obrigatória'),
-  password_confirmation: yup.string().required('Confirmação de senha obrigatória')
+  password: yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres').required('Informe sua senha'),
+  password_confirmation: yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres').required('Confirme sua senha').oneOf([yup.ref('password')], 'As senhas devem ser iguais')
 }).required();
 
 type FormDataProps = yup.InferType<typeof signupSchema>;
