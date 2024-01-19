@@ -26,12 +26,12 @@ const signupSchema = yup.object({
 type FormDataProps = yup.InferType<typeof signupSchema>;
 
 export function Signup() {
-  const form = useForm<FormDataProps>({
+  const form = useForm({
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
     },
     resolver: yupResolver(signupSchema)
   });
