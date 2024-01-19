@@ -14,12 +14,19 @@ import BackgroundImg from "@assets/background.png";
 //* Types imports
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
+type FormDataProps = {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export function Signup() {
-  const form = useForm();
+  const form = useForm<FormDataProps>();
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
-  function handleSignUp(data: any) {
+  function handleSignUp(data: FormDataProps) {
     console.log(data);
   }
 
