@@ -19,8 +19,8 @@ export function Signup() {
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
-  function handleSignUp() {
-
+  function handleSignUp(data: any) {
+    console.log(data);
   }
 
   return (
@@ -112,6 +112,8 @@ export function Signup() {
                 onChangeText={props.field.onChange}
                 onBlur={props.field.onBlur}
                 value={props.field.value}
+                onSubmitEditing={form.handleSubmit(handleSignUp)}
+                returnKeyType="send"
               />
             )}
           />
@@ -119,7 +121,7 @@ export function Signup() {
           <Box pt={6} w="full">
             <Button
               label="Criar e acessar"
-              onPress={handleSignUp}
+              onPress={form.handleSubmit(handleSignUp)}
             />
           </Box>
         </Center>
