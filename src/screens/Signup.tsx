@@ -69,6 +69,9 @@ export function Signup() {
           <Controller
             control={form.control}
             name="name"
+            rules={{
+              required: 'Informe seu nome'
+            }}
             render={(props) => (
               <Input
                 placeholder="Nome"
@@ -82,9 +85,14 @@ export function Signup() {
             )}
           />
 
+          <Text color="white">{form.formState.errors.name?.message}</Text>
+
           <Controller
             control={form.control}
             name="email"
+            rules={{
+              required: 'Informe seu e-mail',
+            }}
             render={(props) => (
               <Input
                 placeholder="E-mail"
@@ -98,9 +106,14 @@ export function Signup() {
             )}
           />
 
+          <Text color="white">{form.formState.errors.email?.message}</Text>
+
           <Controller
             control={form.control}
             name="password"
+            rules={{
+              required: 'Senha obrigatória'
+            }}
             render={(props) => (
               <Input
                 placeholder="Senha"
@@ -114,9 +127,14 @@ export function Signup() {
             )}
           />
 
+          <Text color="white">{form.formState.errors.password?.message}</Text>
+
           <Controller
             control={form.control}
             name="password_confirmation"
+            rules={{
+              required: 'Confirmação de senha obrigatória'
+            }}
             render={(props) => (
               <Input
                 placeholder="Confirmação de senha"
@@ -131,6 +149,8 @@ export function Signup() {
               />
             )}
           />
+
+          <Text color="white">{form.formState.errors.password_confirmation?.message}</Text>
 
           <Box pt={6} w="full">
             <Button
