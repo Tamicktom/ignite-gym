@@ -1,29 +1,22 @@
 //* Libraries imports
-import { VStack, Image, Text, Center, Heading, Box, ScrollView } from "native-base";
+import { VStack, Image, Text, Center, Heading, Box, ScrollView, Toast } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 //* Components imports
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
-//* Local imports
+//* Styles imports
 import LogoSvg from "@assets/logo.svg"
 import BackgroundImg from "@assets/background.png";
 
+//* Hooks imports
+import { useSignUp, signUpSchema, type SignUpProps } from "@hooks/mutations/useSignUp";
+
 //* Types imports
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
-
-const signupSchema = yup.object({
-  name: yup.string().required('Informe seu nome'),
-  email: yup.string().email('E-mail inválido').required('Informe seu e-mail'),
-  password: yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres').required('Informe sua senha'),
-  password_confirmation: yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres').required('Confirme sua senha').oneOf([yup.ref('password')], 'As senhas devem ser iguais')
-}).required();
-
-type FormDataProps = yup.InferType<typeof signupSchema>;
 
 export function Signup() {
   const form = useForm({
@@ -33,13 +26,34 @@ export function Signup() {
       password: '',
       password_confirmation: '',
     },
-    resolver: yupResolver(signupSchema)
+    resolver: yupResolver(signUpSchema),
   });
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
+  const signUp = useSignUp();
 
-  function handleSignUp(data: FormDataProps) {
-    console.log(data);
+  function handleSignUp(data: SignUpProps) {
+    const castedData = signUpSchema.cast(data);
+
+    signUp.mutate(castedData, {
+      onSuccess: () => {
+        console.log('SignUp success');
+        Toast.show({
+          title: 'Cadastro realizado com sucesso',
+          duration: 3000,
+          bgColor: 'green.500',
+        });
+      },
+      onError: (error) => {
+        if (error instanceof Error) {
+          Toast.show({
+            title: error.message,
+            duration: 3000,
+            bgColor: 'red.500',
+          });
+        }
+      },
+    });
   }
 
   return (
