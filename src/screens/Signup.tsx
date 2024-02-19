@@ -45,6 +45,7 @@ export function Signup() {
           title: 'Cadastro realizado com sucesso',
           duration: 3000,
           bgColor: 'green.500',
+          placement: 'top',
         });
       },
       onError: (error) => {
@@ -53,12 +54,14 @@ export function Signup() {
             title: error.message,
             duration: 3000,
             bgColor: 'red.500',
+            placement: 'top',
           });
         } else {
           Toast.show({
             title: 'Erro ao realizar o cadastro. Tente novamente mais tarde.',
             duration: 3000,
             bgColor: 'red.500',
+            placement: 'top',
           });
         }
       },

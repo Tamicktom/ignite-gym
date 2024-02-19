@@ -31,8 +31,6 @@ async function signUp({ email, password, name }: SignUpProps) {
   const body = { email, password, name };
 
   const response = await api.post("/users", body);
-
-  console.log(response.data);
 }
 
 export function useSignUp() {
