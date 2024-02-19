@@ -7,6 +7,8 @@ import { apiRoute } from "@utils/contants";
 import { safeParse } from "@utils/safeParse";
 import { apiErrorSchema } from "@schemas/apiResponse";
 
+import { api } from "@services/api";
+
 export const signUpSchema = yup
   .object({
     name: yup.string().required("Informe seu nome"),
@@ -26,29 +28,11 @@ export const signUpSchema = yup
 export type SignUpProps = yup.InferType<typeof signUpSchema>;
 
 async function signUp({ email, password, name }: SignUpProps) {
-  const body = JSON.stringify({ email, password, name });
-  const url = apiRoute("/users");
+  const body = { email, password, name };
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: body,
-  });
+  const response = await api.post("/users", body);
 
-  if (response.status === 201) {
-    return;
-  } else {
-    const data = await response.json();
-    const parsedResponse = await safeParse(apiErrorSchema, data);
-    if (parsedResponse.success) {
-      throw new Error(parsedResponse.data.message);
-    } else {
-      console.log(parsedResponse.errors);
-      throw new Error(parsedResponse.errors[0]);
-    }
-  }
+  console.log(response.data);
 }
 
 export function useSignUp() {

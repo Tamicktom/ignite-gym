@@ -18,6 +18,9 @@ import { useSignUp, signUpSchema, type SignUpProps } from "@hooks/mutations/useS
 //* Types imports
 import type { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
+//* Local imports
+import { AppError } from "@utils/AppError";
+
 export function Signup() {
   const form = useForm({
     defaultValues: {
@@ -45,9 +48,15 @@ export function Signup() {
         });
       },
       onError: (error) => {
-        if (error instanceof Error) {
+        if (error instanceof AppError) {
           Toast.show({
             title: error.message,
+            duration: 3000,
+            bgColor: 'red.500',
+          });
+        } else {
+          Toast.show({
+            title: 'Erro ao realizar o cadastro. Tente novamente mais tarde.',
             duration: 3000,
             bgColor: 'red.500',
           });
